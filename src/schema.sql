@@ -5,6 +5,10 @@
 .mode column
 
 -- Enable foreign key support
+PRAGMA foreign_keys = ON;
+
+-- DROP TABLE IF EXISTS locations;
+
 
 -- Create your tables here
 -- Example:
@@ -13,6 +17,15 @@
 --     column2 datatype,
 --     ...
 -- );
+
+CREATE TABLE locations (
+    location_id INTEGER PRIMARY KEY, -- Do not need to specify auto increment in sqlite
+    name VARCHAR(50),
+    address VARCHAR(255),
+    phone_number VARCHAR(20),
+    email VARCHAR(50) CHECK(email LIKE '%@%\.%' ESCAPE '\'),
+    opening_hours VARCHAR(11)
+);
 
 -- TODO: Create the following tables:
 -- 1. locations
