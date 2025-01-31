@@ -94,7 +94,7 @@ PRAGMA foreign_keys = ON;
 -- ('NoID', 'Assigned', 'noid.assigned@example.com', '5556667777', 'Trainer', '2022-04-01', 45),  
 -- ('AnotherNoID', 'Assigned', 'another.noid@example.com', '6667778888', 'Manager', '2022-04-15', 46);  
 -- -- Expected result: Both rows should be inserted and unique staff_ids should be assigned.  
--- -- PASS/FAIL  
+-- -- PASS  
 
 -- -- Invalid Attempt with no wrong position  
 -- INSERT INTO staff (first_name, last_name, email, phone_number, position, hire_date, location_id) VALUES  
