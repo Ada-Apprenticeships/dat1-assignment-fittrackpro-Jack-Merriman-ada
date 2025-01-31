@@ -10,6 +10,8 @@ PRAGMA foreign_keys = ON;
 -- DROP TABLE IF EXISTS locations;
 -- DROP TABLE IF EXISTS members;
 -- DROP TABLE IF EXISTS staff;
+-- DROP TABLE IF EXISTS equipment;
+DROP TABLE IF EXISTS classes;
 
 
 -- Create your tables here
@@ -55,6 +57,31 @@ PRAGMA foreign_keys = ON;
 --         ON DELETE SET NULL
 -- );
 
+-- CREATE TABLE equipment (
+--     equipment_id INTEGER PRIMARY KEY,
+--     name VARCHAR CHECK(LENGTH(name) BETWEEN 1 and 30),
+--     type VARCHAR CHECK(type IN ('Cardio','Strength')),
+--     purchase_date DATE CHECK(purchase_date < last_maintenance_date),
+--     last_maintenance_date DATE CHECK(last_maintenance_date BETWEEN purchase_date and next_maintenance_date),
+--     next_maintenance_date DATE CHECK(next_maintenance_date > last_maintenance_date),
+--     location_id INTEGER,
+--     FOREIGN KEY (location_id) REFERENCES locations(location_id)
+--         ON UPDATE CASCADE
+--         ON DELETE SET NULL
+-- );
+
+ CREATE TABLE classes (
+    class_id INTEGER PRIMARY KEY,
+    name VARCHAR CHECK(LENGTH(name) BETWEEN 1 and 30),
+    description TEXT,
+    purchase_date DATE,
+    capacity INTEGER CHECK(capacity >= 0),
+    duration INTEGER CHECK(duration > 0),
+    location_id INTEGER,
+    FOREIGN KEY (location_id) REFERENCES locations(location_id)
+        ON UPDATE CASCADE
+        ON DELETE SET NULL
+);
 
 
 -- TODO: Create the following tables:
