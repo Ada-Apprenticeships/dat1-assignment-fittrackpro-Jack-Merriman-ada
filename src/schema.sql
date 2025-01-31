@@ -11,8 +11,8 @@ PRAGMA foreign_keys = ON;
 -- DROP TABLE IF EXISTS members;
 -- DROP TABLE IF EXISTS staff;
 -- DROP TABLE IF EXISTS equipment;
-DROP TABLE IF EXISTS classes;
-
+-- DROP TABLE IF EXISTS classes;
+DROP TABLE IF EXISTS class_schedule;
 
 -- Create your tables here
 -- Example:
@@ -70,17 +70,32 @@ DROP TABLE IF EXISTS classes;
 --         ON DELETE SET NULL
 -- );
 
- CREATE TABLE classes (
-    class_id INTEGER PRIMARY KEY,
-    name VARCHAR CHECK(LENGTH(name) BETWEEN 1 and 30),
-    description TEXT,
-    purchase_date DATE,
-    capacity INTEGER CHECK(capacity >= 0),
-    duration INTEGER CHECK(duration > 0),
-    location_id INTEGER,
-    FOREIGN KEY (location_id) REFERENCES locations(location_id)
+--  CREATE TABLE classes (
+--     class_id INTEGER PRIMARY KEY,
+--     name VARCHAR CHECK(LENGTH(name) BETWEEN 1 and 30),
+--     description TEXT,
+--     purchase_date DATE,
+--     capacity INTEGER CHECK(capacity >= 0),
+--     duration INTEGER CHECK(duration > 0),
+--     location_id INTEGER,
+--     FOREIGN KEY (location_id) REFERENCES locations(location_id)
+--         ON UPDATE CASCADE
+--         ON DELETE SET NULL
+-- );
+
+CREATE TABLE class_schedule(
+    schedule_id INTEGER PRIMARY KEY,
+    class_id INTEGER,
+    staff_id INTEGER,
+    start_time VARCHAR CHECK(start_time LIKE '%-%-% %:%:%'), --match pattern 'YYYY-MM-DD HH:MM:SS'
+    end_time VARCHAR CHECK(start_time LIKE '%-%-% %:%:%'),
+    FOREIGN KEY (class_id) REFERENCES classes(class_id)
         ON UPDATE CASCADE
-        ON DELETE SET NULL
+        ON DELETE CASCADE, -- IF class removed then remove from schedule
+    FOREIGN KEY (staff_id) REFERENCES staff(staff_id)
+        ON UPDATE CASCADE
+        ON DELETE SET NULL -- if staff record deleted, keep class in schedule
+
 );
 
 
