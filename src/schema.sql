@@ -7,7 +7,7 @@
 -- Enable foreign key support
 PRAGMA foreign_keys = ON;
 
--- DROP TABLE IF EXISTS locations;
+DROP TABLE IF EXISTS locations;
 
 
 -- Create your tables here
@@ -19,12 +19,12 @@ PRAGMA foreign_keys = ON;
 -- );
 
 CREATE TABLE locations (
-    location_id INTEGER PRIMARY KEY, -- Do not need to specify auto increment in sqlite
-    name VARCHAR(50),
-    address VARCHAR(255),
-    phone_number VARCHAR(20),
+    location_id INTEGER PRIMARY KEY, -- Do not need to specify auto increment in sqlite, as i would in other SQL
+    name VARCHAR CHECK(LENGTH(name) BETWEEN 1 and 20), -- Changed to check constraint instead of specifying no. chars, as this is not supported in sqlite
+    address VARCHAR,
+    phone_number VARCHAR CHECK(LENGTH(phone_number) BETWEEN 10 and 20), 
     email VARCHAR(50) CHECK(email LIKE '%@%\.%' ESCAPE '\'),
-    opening_hours VARCHAR(11)
+    opening_hours VARCHAR CHECK(LENGTH(opening_hours) BETWEEN 11 and 13) -- 'x:xx-x:xx' up to 'xx:xx-xx:xx'
 );
 
 -- TODO: Create the following tables:
