@@ -36,8 +36,8 @@ PRAGMA foreign_keys = ON;
 -- (11, 'EdgeHours', '322 Pine St', '0123456789', 'hours@cases.com', '0:00-0:00'),  
 -- (12, 'MinHoursEdge', '323 Pine St', '1112223333', 'minhours@cases.com', '2:00-3:00');  
 -- -- Expected result: All rows should be inserted successfully.  
--- -- FAIL
-                -- NOTES: Runtime error near line 34: CHECK constraint failed: LENGTH(opening_hours) BETWEEN 11 and 13 (19)
+-- -- PASS
+--                 -- NOTES: ERROR RESOLVED - changed values in CHECK constraint
   
 -- -- Edge case: Maximum length for opening_hours  
 -- INSERT INTO locations (location_id, name, address, phone_number, email, opening_hours) VALUES  
@@ -45,9 +45,7 @@ PRAGMA foreign_keys = ON;
 -- (14, 'MaxHoursOne', '655 Spruce St', '2223334444', 'max1@hours.com', '23:59-23:59'),  
 -- (15, 'MaxHoursTwo', '656 Spruce St', '3334445555', 'max2@hours.com', '11:11-11:11');  
 -- -- Expected result: All rows should be inserted successfully.  
--- -- PASS/FAIL
---                 -- NOTES: WOnt be able to test properly until opening hours are changed
-
+-- -- PASS
   
 -- -- Invalid input: Name too short  
 -- INSERT INTO locations (location_id, name, address, phone_number, email, opening_hours) VALUES  
