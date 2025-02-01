@@ -141,10 +141,13 @@ DROP TABLE IF EXISTS payments;
 CREATE TABLE payments(
     payment_id INTEGER PRIMARY KEY,
     member_id INTEGER,
-    amount DECIMAL(4,2),
+    amount DECIMAL(4,2) CHECK(amount >= 00.00),
     payment_date DATE VARCHAR CHECK(payment_date LIKE '%-%-% %:%:%'),
     payment_method VARCHAR CHECK(payment_method IN ('Credit Card', 'Bank Transfer', 'PayPal')),
-    payment_type VARCHAR CHECK(payment_type IN ('Monthly membership fee', 'Day pass'))
+    payment_type VARCHAR CHECK(payment_type IN ('Monthly membership fee', 'Day pass')),
+    FOREIGN KEY (member_id) REFERENCES members(member_id)
+        ON UPDATE CASCADE
+        ON DELETE SET NULL -- keep for accounting/analytics pruposes
 );
 
 -- TODO: Create the following tables:

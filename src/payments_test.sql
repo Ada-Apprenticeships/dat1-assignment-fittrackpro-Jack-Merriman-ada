@@ -26,9 +26,7 @@ PRAGMA foreign_keys = ON;
 -- (5, 998, 9.99, '2023-10-08 16:30:00', 'Bank Transfer', 'Day pass'),  
 -- (6, 997, 49.99, '2023-10-09 17:15:00', 'PayPal', 'Monthly membership fee');  
 -- -- Expected result: All rows should fail due to foreign key constraint violation.  
--- -- FAIL  
-        -- INPUT WAS ALLOWeD SHOULD HAVE FAILED
-
+-- -- PASS  
 
 -- -- Invalid input: Incorrect payment_date format  
 -- INSERT INTO payments (payment_id, member_id, amount, payment_date, payment_method, payment_type) VALUES  
@@ -40,39 +38,38 @@ PRAGMA foreign_keys = ON;
   
 -- -- Invalid input: Negative amount  
 -- INSERT INTO payments (payment_id, member_id, amount, payment_date, payment_method, payment_type) VALUES  
--- (19, 19, -49.99, '2023-11-01 09:00:00', 'Credit Card', 'Monthly membership fee'),  
--- (20, 20, -9.99, '2023-11-02 10:30:00', 'Bank Transfer', 'Day pass'),  
--- (21, 21, -100.00, '2023-11-03 11:15:00', 'PayPal', 'Monthly membership fee');  
+-- (19, 1, -49.99, '2023-11-01 09:00:00', 'Credit Card', 'Monthly membership fee'),  
+-- (20, 2, -9.99, '2023-11-02 10:30:00', 'Bank Transfer', 'Day pass'),  
+-- (21, 3, -100.00, '2023-11-03 11:15:00', 'PayPal', 'Monthly membership fee');  
 -- -- Expected result: All rows should fail due to amount constraint (assuming amount must be non-negative).  
--- -- FAIL  
-        -- INPUT WAS ALLOWeD SHOULD HAVE FAILED
+-- -- PASS  
 
 
 -- -- Invalid input: Non-numeric amount  
 -- INSERT INTO payments (payment_id, member_id, amount, payment_date, payment_method, payment_type) VALUES  
--- (22, 22, 'forty-nine', '2023-11-04 12:00:00', 'Credit Card', 'Monthly membership fee'),  
--- (23, 23, 'nine', '2023-11-05 13:45:00', 'Bank Transfer', 'Day pass'),  
--- (24, 24, 'hundred', '2023-11-06 14:30:00', 'PayPal', 'Monthly membership fee');  
+-- (22, 1, 'forty-nine', '2023-11-04 12:00:00', 'Credit Card', 'Monthly membership fee'),  
+-- (23, 2, 'nine', '2023-11-05 13:45:00', 'Bank Transfer', 'Day pass'),  
+-- (24, 3, 'hundred', '2023-11-06 14:30:00', 'PayPal', 'Monthly membership fee');  
 -- -- Expected result: All rows should fail due to amount being non-numeric.  
 -- -- FAIL
         -- INPUT WAS ALLOWeD SHOULD HAVE FAILED
   
 -- -- Invalid input: Excessive decimal places  
 -- INSERT INTO payments (payment_id, member_id, amount, payment_date, payment_method, payment_type) VALUES  
--- (25, 25, 49.9999, '2023-11-07 15:00:00', 'Credit Card', 'Monthly membership fee'),  
--- (26, 26, 9.9999, '2023-11-08 16:30:00', 'Bank Transfer', 'Day pass'),  
--- (27, 27, 100.9999, '2023-11-09 17:15:00', 'PayPal', 'Monthly membership fee');  
+-- (25, 1, 49.9999, '2023-11-07 15:00:00', 'Credit Card', 'Monthly membership fee'),  
+-- (26, 2, 9.9999, '2023-11-08 16:30:00', 'Bank Transfer', 'Day pass'),  
+-- (27, 3, 100.9999, '2023-11-09 17:15:00', 'PayPal', 'Monthly membership fee');  
 -- -- Expected result: All rows should fail if the database does not support more than two decimal places.  
 -- -- FAIL
         -- INPUT WAS ALLOWeD SHOULD HAVE FAILED
   
--- -- Invalid input: Amount as a string (without quotes)  
--- INSERT INTO payments (payment_id, member_id, amount, payment_date, payment_method, payment_type) VALUES  
--- (28, 28, '49.99', '2023-11-10 18:00:00', 'Credit Card', 'Monthly membership fee'),  
--- (29, 29, '9.99', '2023-11-11 19:30:00', 'Bank Transfer', 'Day pass'),  
--- (30, 30, '100.00', '2023-11-12 20:15:00', 'PayPal', 'Monthly membership fee');  
--- -- Expected result: All rows should fail if the amount is stored as a string instead of a numeric type.  
--- -- FAIL
+-- Invalid input: Amount as a string (without quotes)  
+INSERT INTO payments (payment_id, member_id, amount, payment_date, payment_method, payment_type) VALUES  
+(28, 1, '49.99', '2023-11-10 18:00:00', 'Credit Card', 'Monthly membership fee'),  
+(29, 2, '9.99', '2023-11-11 19:30:00', 'Bank Transfer', 'Day pass'),  
+(30, 3, '100.00', '2023-11-12 20:15:00', 'PayPal', 'Monthly membership fee');  
+-- Expected result: All rows should fail if the amount is stored as a string instead of a numeric type.  
+-- FAIL
         -- INPUT WAS ALLOWeD SHOULD HAVE FAILED
 
 -- -- Invalid input: Incorrect payment_method value  
