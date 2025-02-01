@@ -14,7 +14,7 @@ PRAGMA foreign_keys = ON;
 -- DROP TABLE IF EXISTS classes;
 -- DROP TABLE IF EXISTS class_schedule;
 -- DROP TABLE IF EXISTS memberships;
-DROP TABLE IF EXISTS attendance;
+-- DROP TABLE IF EXISTS attendance;
 
 -- Create your tables here
 -- Example:
@@ -112,16 +112,18 @@ DROP TABLE IF EXISTS attendance;
 --         ON DELETE CASCADE -- if no member then no membership
 -- );
 
-CREATE TABLE attendance(
-    attendance_id INTEGER PRIMARY KEY,
-    member_id INTEGER,
-    location_id INTEGER,
-    check_in_time VARCHAR CHECK(check_in_time LIKE '%-%-% %:%:%'),
-    check_out_time VARCHAR CHECK(check_out_time LIKE '%-%-% %:%:%'),
-    FOREIGN KEY (member_id) REFERENCES members(member_id)
-        ON UPDATE CASCADE
-        ON DELETE SET NULL -- want to retain records for analytics purposes in future
-);
+-- CREATE TABLE attendance(
+--     attendance_id INTEGER PRIMARY KEY,
+--     member_id INTEGER,
+--     location_id INTEGER,
+--     check_in_time VARCHAR CHECK(check_in_time LIKE '%-%-% %:%:%'),
+--     check_out_time VARCHAR CHECK(check_out_time LIKE '%-%-% %:%:%'),
+--     FOREIGN KEY (member_id) REFERENCES members(member_id)
+--         ON UPDATE CASCADE
+--         ON DELETE SET NULL -- want to retain records for analytics purposes in future
+-- );
+
+CREATE TABLE class_atte
 
 
 -- TODO: Create the following tables:
