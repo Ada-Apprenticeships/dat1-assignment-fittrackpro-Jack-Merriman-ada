@@ -15,6 +15,8 @@ PRAGMA foreign_keys = ON;
 -- DROP TABLE IF EXISTS class_schedule;
 -- DROP TABLE IF EXISTS memberships;
 -- DROP TABLE IF EXISTS attendance;
+-- DROP TABLE IF EXISTS class_attendance;
+DROP TABLE IF EXISTS payments;
 
 -- Create your tables here
 -- Example:
@@ -123,7 +125,19 @@ PRAGMA foreign_keys = ON;
 --         ON DELETE SET NULL -- want to retain records for analytics purposes in future
 -- );
 
-CREATE TABLE class_atte
+-- CREATE TABLE class_attendance(
+--     class_attendance_id INTEGER PRIMARY KEY,
+--     schedule_id INTEGER,
+--     member_id INTEGER,
+--     attendance_status VARCHAR CHECK(attendance_status IN ('Registered', 'Attended', 'Unattended')),
+--     FOREIGN KEY (schedule_id) REFERENCES class_schedule(schedule_id)
+--         ON UPDATE CASCADE
+--         ON DELETE SET NULL, -- in case needed in future for analytics purposes
+--     FOREIGN KEY (member_id) REFERENCES members(member_id)
+--         ON UPDATE CASCADE
+--         ON DELETE SET NULL -- in case needed in future for analytics purposes
+-- );
+
 
 
 -- TODO: Create the following tables:
