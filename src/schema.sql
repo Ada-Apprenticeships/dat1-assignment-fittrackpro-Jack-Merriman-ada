@@ -138,7 +138,14 @@ DROP TABLE IF EXISTS payments;
 --         ON DELETE SET NULL -- in case needed in future for analytics purposes
 -- );
 
-
+CREATE TABLE payments(
+    payment_id INTEGER PRIMARY KEY,
+    member_id INTEGER,
+    amount DECIMAL(4,2),
+    payment_date DATE VARCHAR CHECK(payment_date LIKE '%-%-% %:%:%'),
+    payment_method VARCHAR CHECK(payment_method IN ('Credit Card', 'Bank Transfer', 'PayPal')),
+    payment_type VARCHAR CHECK(payment_type IN ('Monthly membership fee', 'Day pass'))
+);
 
 -- TODO: Create the following tables:
 -- 1. locations
