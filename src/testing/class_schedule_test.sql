@@ -26,8 +26,7 @@ PRAGMA foreign_keys = ON;
 -- (8, 2, 1, '2023-10-01 11:00:00', '10:00:00 2023-10-01'),  
 -- (9, 3, 2, '2023-10-01 13:00:00', '20231001 140000');  
 -- -- Expected result: All rows should fail due to incorrect end_time format.  
--- -- FAIL
---         -- INPUT WAS ACCEPTED, SHOULD HAVE FAILED
+-- -- PASS
   
 -- -- Invalid input: Duplicate PRIMARY KEY  
 -- INSERT INTO class_schedule (schedule_id, class_id, staff_id, start_time, end_time) VALUES  
