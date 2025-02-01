@@ -142,7 +142,7 @@ PRAGMA foreign_keys = ON;
 --     payment_id INTEGER PRIMARY KEY,
 --     member_id INTEGER, 
 --     amount REAL NOT NULL CHECK (amount BETWEEN 0 AND 1000 AND (CAST(amount * 100 AS INTEGER) = amount * 100)),     payment_date DATE VARCHAR CHECK(payment_date LIKE '%-%-% %:%:%'),
---     payment_method VARCHAR CHECK(payment_method IN ('Credit Card', 'Bank Transfer', 'PayPal')),
+--     payment_method VARCHAR CHECK(payment_method IN ('Credit Card', 'Bank Transfer', 'PayPal', 'Cash')),
 --     payment_type VARCHAR CHECK(payment_type IN ('Monthly membership fee', 'Day pass')),
 --     FOREIGN KEY (member_id) REFERENCES members(member_id)
 --         ON UPDATE CASCADE
