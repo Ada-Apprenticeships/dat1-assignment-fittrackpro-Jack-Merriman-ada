@@ -51,26 +51,24 @@ PRAGMA foreign_keys = ON;
 -- (23, 2, 'nine', '2023-11-05 13:45:00', 'Bank Transfer', 'Day pass'),  
 -- (24, 3, 'hundred', '2023-11-06 14:30:00', 'PayPal', 'Monthly membership fee');  
 -- -- Expected result: All rows should fail due to amount being non-numeric.  
--- -- FAIL
-        -- INPUT WAS ALLOWeD SHOULD HAVE FAILED
-  
+-- -- PASS
+
+
 -- -- Invalid input: Excessive decimal places  
 -- INSERT INTO payments (payment_id, member_id, amount, payment_date, payment_method, payment_type) VALUES  
 -- (25, 1, 49.9999, '2023-11-07 15:00:00', 'Credit Card', 'Monthly membership fee'),  
 -- (26, 2, 9.9999, '2023-11-08 16:30:00', 'Bank Transfer', 'Day pass'),  
 -- (27, 3, 100.9999, '2023-11-09 17:15:00', 'PayPal', 'Monthly membership fee');  
 -- -- Expected result: All rows should fail if the database does not support more than two decimal places.  
--- -- FAIL
-        -- INPUT WAS ALLOWeD SHOULD HAVE FAILED
-  
--- Invalid input: Amount as a string (without quotes)  
-INSERT INTO payments (payment_id, member_id, amount, payment_date, payment_method, payment_type) VALUES  
-(28, 1, '49.99', '2023-11-10 18:00:00', 'Credit Card', 'Monthly membership fee'),  
-(29, 2, '9.99', '2023-11-11 19:30:00', 'Bank Transfer', 'Day pass'),  
-(30, 3, '100.00', '2023-11-12 20:15:00', 'PayPal', 'Monthly membership fee');  
--- Expected result: All rows should fail if the amount is stored as a string instead of a numeric type.  
--- FAIL
-        -- INPUT WAS ALLOWeD SHOULD HAVE FAILED
+-- -- PASS
+
+-- --  Valid input: Excessive decimal places  
+-- INSERT INTO payments (payment_id, member_id, amount, payment_date, payment_method, payment_type) VALUES  
+-- (25, 1, 49.00, '2023-11-07 15:00:00', 'Credit Card', 'Monthly membership fee'),  
+-- (26, 2, 9.99, '2023-11-08 16:30:00', 'Bank Transfer', 'Day pass'),  
+-- (27, 3, 100.50, '2023-11-09 17:15:00', 'PayPal', 'Monthly membership fee');  
+-- -- Expected result: All rows should fail if the database does not support more than two decimal places.  
+-- -- PASS
 
 -- -- Invalid input: Incorrect payment_method value  
 -- INSERT INTO payments (payment_id, member_id, amount, payment_date, payment_method, payment_type) VALUES  

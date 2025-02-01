@@ -16,7 +16,7 @@ PRAGMA foreign_keys = ON;
 -- DROP TABLE IF EXISTS memberships;
 -- DROP TABLE IF EXISTS attendance;
 -- DROP TABLE IF EXISTS class_attendance;
-DROP TABLE IF EXISTS payments;
+-- DROP TABLE IF EXISTS payments;
 
 -- Create your tables here
 -- Example:
@@ -138,17 +138,16 @@ DROP TABLE IF EXISTS payments;
 --         ON DELETE SET NULL -- in case needed in future for analytics purposes
 -- );
 
-CREATE TABLE payments(
-    payment_id INTEGER PRIMARY KEY,
-    member_id INTEGER,
-    amount DECIMAL(4,2) CHECK(amount >= 00.00),
-    payment_date DATE VARCHAR CHECK(payment_date LIKE '%-%-% %:%:%'),
-    payment_method VARCHAR CHECK(payment_method IN ('Credit Card', 'Bank Transfer', 'PayPal')),
-    payment_type VARCHAR CHECK(payment_type IN ('Monthly membership fee', 'Day pass')),
-    FOREIGN KEY (member_id) REFERENCES members(member_id)
-        ON UPDATE CASCADE
-        ON DELETE SET NULL -- keep for accounting/analytics pruposes
-);
+-- CREATE TABLE payments(
+--     payment_id INTEGER PRIMARY KEY,
+--     member_id INTEGER, 
+--     amount REAL NOT NULL CHECK (amount BETWEEN 0 AND 1000 AND (CAST(amount * 100 AS INTEGER) = amount * 100)),     payment_date DATE VARCHAR CHECK(payment_date LIKE '%-%-% %:%:%'),
+--     payment_method VARCHAR CHECK(payment_method IN ('Credit Card', 'Bank Transfer', 'PayPal')),
+--     payment_type VARCHAR CHECK(payment_type IN ('Monthly membership fee', 'Day pass')),
+--     FOREIGN KEY (member_id) REFERENCES members(member_id)
+--         ON UPDATE CASCADE
+--         ON DELETE SET NULL   -- keep for accounting/analytics pruposes
+-- );
 
 -- TODO: Create the following tables:
 -- 1. locations
