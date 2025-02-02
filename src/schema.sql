@@ -157,7 +157,7 @@ CREATE TABLE personal_training_sessions(
     staff_id INTEGER,
     session_date DATE,
     start_time VARCHAR
-        CHECK (end_time GLOB '[0-9][0-9]:[0-9][0-9]:[0-9][0-9]' AND  
+        CHECK (start_time GLOB '[0-9][0-9]:[0-9][0-9]:[0-9][0-9]' AND  
         CAST(SUBSTR(start_time, 1, 2) AS INTEGER) BETWEEN 0 AND 23 AND  
         CAST(SUBSTR(start_time, 4, 2) AS INTEGER) BETWEEN 0 AND 59 AND  
         CAST(SUBSTR(start_time, 7, 2) AS INTEGER) BETWEEN 0 AND 59
