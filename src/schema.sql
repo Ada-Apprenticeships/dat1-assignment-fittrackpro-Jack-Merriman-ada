@@ -17,7 +17,8 @@ PRAGMA foreign_keys = ON;
 -- DROP TABLE IF EXISTS attendance;
 -- DROP TABLE IF EXISTS class_attendance;
 -- DROP TABLE IF EXISTS payments;
-DROP TABLE IF EXISTS personal_training_sessions;
+-- DROP TABLE IF EXISTS personal_training_sessions;
+DROP TABLE IF EXISTS member_health_metrics;
 
 -- Create your tables here
 -- Example:
@@ -151,36 +152,59 @@ DROP TABLE IF EXISTS personal_training_sessions;
 --         ON DELETE SET NULL   -- keep for accounting/analytics pruposes
 -- );
 
-CREATE TABLE personal_training_sessions(
-    session_id INTEGER PRIMARY KEY,
+-- CREATE TABLE personal_training_sessions(
+--     session_id INTEGER PRIMARY KEY,
+--     member_id INTEGER,
+--     staff_id INTEGER,
+--     session_date DATE,
+--     start_time VARCHAR
+--         CHECK (start_time GLOB '[0-9][0-9]:[0-9][0-9]:[0-9][0-9]' AND  
+--         CAST(SUBSTR(start_time, 1, 2) AS INTEGER) BETWEEN 0 AND 23 AND  
+--         CAST(SUBSTR(start_time, 4, 2) AS INTEGER) BETWEEN 0 AND 59 AND  
+--         CAST(SUBSTR(start_time, 7, 2) AS INTEGER) BETWEEN 0 AND 59),
+--         -- Ensure the format is correct  
+--     end_time VARCHAR
+--         CHECK (end_time GLOB '[0-9][0-9]:[0-9][0-9]:[0-9][0-9]' AND  
+--         CAST(SUBSTR(end_time, 1, 2) AS INTEGER) BETWEEN 0 AND 23 AND  
+--         CAST(SUBSTR(end_time, 4, 2) AS INTEGER) BETWEEN 0 AND 59 AND  
+--         CAST(SUBSTR(end_time, 7, 2) AS INTEGER) BETWEEN 0 AND 59),
+--     notes TEXT,
+--     FOREIGN KEY (member_id) REFERENCES members(member_id)
+--         ON UPDATE CASCADE
+--         ON DELETE SET NULL,
+--     FOREIGN KEY (staff_id) REFERENCES staff(staff_id)
+--         ON UPDATE CASCADE
+--         ON DELETE SET NULL
+    
+    
+--        /*left both foreign keys as "ON DELETE SET NULL" so that
+--     either member data or staff data can be tracked in future
+--     regardless of if people leave*/
+-- );
+
+CREATE TABLE member_health_metrics(
+    metric_id INTEGER PRIMARY KEY,
     member_id INTEGER,
-    staff_id INTEGER,
-    session_date DATE,
-    start_time VARCHAR
-        CHECK (start_time GLOB '[0-9][0-9]:[0-9][0-9]:[0-9][0-9]' AND  
-        CAST(SUBSTR(start_time, 1, 2) AS INTEGER) BETWEEN 0 AND 23 AND  
-        CAST(SUBSTR(start_time, 4, 2) AS INTEGER) BETWEEN 0 AND 59 AND  
-        CAST(SUBSTR(start_time, 7, 2) AS INTEGER) BETWEEN 0 AND 59
-        ),
-        -- Ensure the format is correct  
-    end_time VARCHAR
-        CHECK (end_time GLOB '[0-9][0-9]:[0-9][0-9]:[0-9][0-9]' AND  
-        CAST(SUBSTR(end_time, 1, 2) AS INTEGER) BETWEEN 0 AND 23 AND  
-        CAST(SUBSTR(end_time, 4, 2) AS INTEGER) BETWEEN 0 AND 59 AND  
-        CAST(SUBSTR(end_time, 7, 2) AS INTEGER) BETWEEN 0 AND 59  
-    ),
-    notes TEXT,
+    measurement_date DATE,
+    weight VARCHAR
+        CHECK (weight GLOB '[0-9][0-9].[0-9]' AND  
+        CAST(SUBSTR(weight, 1, 2) AS INTEGER) BETWEEN 0 AND 99 AND  
+        CAST(SUBSTR(weight, 4, 1) AS INTEGER) BETWEEN 0 AND 9),
+    body_fat_percentage VARCHAR
+        CHECK (body_fat_percentage GLOB '[0-9][0-9].[0-9]' AND  
+        CAST(SUBSTR(body_fat_percentage, 1, 2) AS INTEGER) BETWEEN 0 AND 99 AND  
+        CAST(SUBSTR(body_fat_percentage, 4, 1) AS INTEGER) BETWEEN 0 AND 9),
+    muscle_mass VARCHAR
+        CHECK (muscle_mass GLOB '[0-9][0-9].[0-9]' AND  
+        CAST(SUBSTR(muscle_mass, 1, 2) AS INTEGER) BETWEEN 0 AND 99 AND  
+        CAST(SUBSTR(muscle_mass, 4, 1) AS INTEGER) BETWEEN 0 AND 9),
+    bmi VARCHAR
+        CHECK (bmi GLOB '[0-9][0-9].[0-9]' AND  
+        CAST(SUBSTR(bmi, 1, 2) AS INTEGER) BETWEEN 0 AND 99 AND  
+        CAST(SUBSTR(bmi, 4, 1) AS INTEGER) BETWEEN 0 AND 9),
     FOREIGN KEY (member_id) REFERENCES members(member_id)
         ON UPDATE CASCADE
-        ON DELETE SET NULL,
-    FOREIGN KEY (staff_id) REFERENCES staff(staff_id)
-        ON UPDATE CASCADE
-        ON DELETE SET NULL
-    
-    
-       /*left both foreign keys as "ON DELETE SET NULL" so that
-    either member data or staff data can be tracked in future
-    regardless of if people leave*/
+        ON DELETE CASCADE
 );
 
 -- TODO: Create the following tables:

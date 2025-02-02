@@ -149,38 +149,38 @@
 -- (13, 15.00, '2025-01-17 14:00:00', 'Cash', 'Day pass'),
 -- (14, 15.00, '2025-01-18 11:15:00', 'Credit Card', 'Day pass');
 
--- Sample data for personal_training_sessions
-INSERT INTO personal_training_sessions (member_id, staff_id, session_date, start_time, end_time, notes)
-VALUES 
-(1, 1, '2024-11-05', '10:00:00', '11:00:00', 'Focus on upper body strength'),
-(2, 2, '2024-11-20', '15:00:00', '16:00:00', 'Cardio and endurance training'),
-(3, 6, '2024-12-07', '09:00:00', '10:00:00', 'Core workout and flexibility'),
-(5, 8, '2024-12-19', '11:00:00', '12:00:00', 'Full body workout'),
-(7, 6, '2025-01-11', '13:00:00', '14:00:00', 'Yoga and stretching'),
-(9, 3, '2025-01-15', '08:00:00', '09:00:00', 'Morning cardio session'),
-(11, 7, '2025-01-20', '12:00:00', '13:00:00', 'Midday flexibility workout'),
-(13, 1, '2025-01-25', '15:00:00', '16:00:00', 'Afternoon endurance training'),
-(1, 1, '2025-02-05', '10:00:00', '11:00:00', 'Focus on upper body strength'),
-(3, 6, '2025-02-07', '09:00:00', '10:00:00', 'Core workout and flexibility'),
-(5, 8, '2025-02-09', '11:00:00', '12:00:00', 'Full body workout'),
-(7, 6, '2025-02-11', '13:00:00', '14:00:00', 'Yoga and stretching'),
-(9, 3, '2025-02-15', '08:00:00', '09:00:00', 'Morning cardio session'),
-(11, 7, '2025-02-18', '12:00:00', '13:00:00', 'Midday flexibility workout'),
-(13, 1, '2025-02-20', '15:00:00', '16:00:00', 'Afternoon endurance training');
-
--- -- Sample data for member_health_metrics
--- INSERT INTO member_health_metrics (member_id, measurement_date, weight, body_fat_percentage, muscle_mass, bmi)
+-- -- Sample data for personal_training_sessions
+-- INSERT INTO personal_training_sessions (member_id, staff_id, session_date, start_time, end_time, notes)
 -- VALUES 
--- (1, '2024-11-01', 70.5, 22.0, 35.0, 23.5),
--- (2, '2024-11-15', 80.0, 18.0, 40.0, 24.0),
--- (3, '2024-12-01', 65.0, 24.0, 32.0, 22.5),
--- (4, '2024-12-15', 75.5, 20.0, 38.0, 23.8),
--- (5, '2025-01-01', 68.0, 23.0, 34.0, 22.8),
--- (6, '2025-01-15', 82.5, 17.0, 42.0, 24.5),
--- (7, '2025-01-20', 62.0, 25.0, 30.0, 21.5),
--- (8, '2025-01-25', 78.0, 19.0, 39.0, 24.2),
--- (9, '2025-01-28', 72.5, 21.0, 36.0, 23.2),
--- (10, '2025-01-28', 85.0, 16.0, 43.0, 25.0);
+-- (1, 1, '2024-11-05', '10:00:00', '11:00:00', 'Focus on upper body strength'),
+-- (2, 2, '2024-11-20', '15:00:00', '16:00:00', 'Cardio and endurance training'),
+-- (3, 6, '2024-12-07', '09:00:00', '10:00:00', 'Core workout and flexibility'),
+-- (5, 8, '2024-12-19', '11:00:00', '12:00:00', 'Full body workout'),
+-- (7, 6, '2025-01-11', '13:00:00', '14:00:00', 'Yoga and stretching'),
+-- (9, 3, '2025-01-15', '08:00:00', '09:00:00', 'Morning cardio session'),
+-- (11, 7, '2025-01-20', '12:00:00', '13:00:00', 'Midday flexibility workout'),
+-- (13, 1, '2025-01-25', '15:00:00', '16:00:00', 'Afternoon endurance training'),
+-- (1, 1, '2025-02-05', '10:00:00', '11:00:00', 'Focus on upper body strength'),
+-- (3, 6, '2025-02-07', '09:00:00', '10:00:00', 'Core workout and flexibility'),
+-- (5, 8, '2025-02-09', '11:00:00', '12:00:00', 'Full body workout'),
+-- (7, 6, '2025-02-11', '13:00:00', '14:00:00', 'Yoga and stretching'),
+-- (9, 3, '2025-02-15', '08:00:00', '09:00:00', 'Morning cardio session'),
+-- (11, 7, '2025-02-18', '12:00:00', '13:00:00', 'Midday flexibility workout'),
+-- (13, 1, '2025-02-20', '15:00:00', '16:00:00', 'Afternoon endurance training');
+
+-- Sample data for member_health_metrics
+INSERT INTO member_health_metrics (member_id, measurement_date, weight, body_fat_percentage, muscle_mass, bmi)
+VALUES 
+(1, '2024-11-01', 70.5, 22.0, 35.0, 23.5),
+(2, '2024-11-15', 80.0, 18.0, 40.0, 24.0),
+(3, '2024-12-01', 65.0, 24.0, 32.0, 22.5),
+(4, '2024-12-15', 75.5, 20.0, 38.0, 23.8),
+(5, '2025-01-01', 68.0, 23.0, 34.0, 22.8),
+(6, '2025-01-15', 82.5, 17.0, 42.0, 24.5),
+(7, '2025-01-20', 62.0, 25.0, 30.0, 21.5),
+(8, '2025-01-25', 78.0, 19.0, 39.0, 24.2),
+(9, '2025-01-28', 72.5, 21.0, 36.0, 23.2),
+(10, '2025-01-28', 85.0, 16.0, 43.0, 25.0);
 
 -- -- Sample data for equipment_maintenance_log 
 -- INSERT INTO equipment_maintenance_log (equipment_id, maintenance_date, description, staff_id)
