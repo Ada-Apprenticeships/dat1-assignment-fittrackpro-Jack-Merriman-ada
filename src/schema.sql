@@ -17,6 +17,7 @@ PRAGMA foreign_keys = ON;
 -- DROP TABLE IF EXISTS attendance;
 -- DROP TABLE IF EXISTS class_attendance;
 -- DROP TABLE IF EXISTS payments;
+DROP TABLE IF EXISTS personal_training_sessions;
 
 -- Create your tables here
 -- Example:
@@ -141,13 +142,46 @@ PRAGMA foreign_keys = ON;
 -- CREATE TABLE payments(
 --     payment_id INTEGER PRIMARY KEY,
 --     member_id INTEGER, 
---     amount REAL NOT NULL CHECK (amount BETWEEN 0 AND 1000 AND (CAST(amount * 100 AS INTEGER) = amount * 100)),     payment_date DATE VARCHAR CHECK(payment_date LIKE '%-%-% %:%:%'),
+--     amount REAL NOT NULL CHECK (amount BETWEEN 0 AND 1000 AND (CAST(amount * 100 AS INTEGER) = amount * 100)),     
+--     payment_date DATE VARCHAR CHECK(payment_date LIKE '%-%-% %:%:%'),
 --     payment_method VARCHAR CHECK(payment_method IN ('Credit Card', 'Bank Transfer', 'PayPal', 'Cash')),
 --     payment_type VARCHAR CHECK(payment_type IN ('Monthly membership fee', 'Day pass')),
 --     FOREIGN KEY (member_id) REFERENCES members(member_id)
 --         ON UPDATE CASCADE
 --         ON DELETE SET NULL   -- keep for accounting/analytics pruposes
 -- );
+
+CREATE TABLE personal_training_sessions(
+    session_id INTEGER PRIMARY KEY,
+    member_id INTEGER,
+    staff_id INTEGER,
+    session_date DATE,
+    start_time VARCHAR
+        CHECK (end_time GLOB '[0-9][0-9]:[0-9][0-9]:[0-9][0-9]' AND  
+        CAST(SUBSTR(start_time, 1, 2) AS INTEGER) BETWEEN 0 AND 23 AND  
+        CAST(SUBSTR(start_time, 4, 2) AS INTEGER) BETWEEN 0 AND 59 AND  
+        CAST(SUBSTR(start_time, 7, 2) AS INTEGER) BETWEEN 0 AND 59
+        ),
+        -- Ensure the format is correct  
+    end_time VARCHAR
+        CHECK (end_time GLOB '[0-9][0-9]:[0-9][0-9]:[0-9][0-9]' AND  
+        CAST(SUBSTR(end_time, 1, 2) AS INTEGER) BETWEEN 0 AND 23 AND  
+        CAST(SUBSTR(end_time, 4, 2) AS INTEGER) BETWEEN 0 AND 59 AND  
+        CAST(SUBSTR(end_time, 7, 2) AS INTEGER) BETWEEN 0 AND 59  
+    ),
+    notes TEXT,
+    FOREIGN KEY (member_id) REFERENCES members(member_id)
+        ON UPDATE CASCADE
+        ON DELETE SET NULL,
+    FOREIGN KEY (staff_id) REFERENCES staff(staff_id)
+        ON UPDATE CASCADE
+        ON DELETE SET NULL
+    
+    
+       /*left both foreign keys as "ON DELETE SET NULL" so that
+    either member data or staff data can be tracked in future
+    regardless of if people leave*/
+);
 
 -- TODO: Create the following tables:
 -- 1. locations
