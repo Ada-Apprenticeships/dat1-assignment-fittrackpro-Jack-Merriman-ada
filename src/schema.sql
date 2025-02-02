@@ -18,7 +18,8 @@ PRAGMA foreign_keys = ON;
 -- DROP TABLE IF EXISTS class_attendance;
 -- DROP TABLE IF EXISTS payments;
 -- DROP TABLE IF EXISTS personal_training_sessions;
-DROP TABLE IF EXISTS member_health_metrics;
+-- DROP TABLE IF EXISTS member_health_metrics;
+-- DROP TABLE IF EXISTS equipment_maintenance_log;
 
 -- Create your tables here
 -- Example:
@@ -182,30 +183,44 @@ DROP TABLE IF EXISTS member_health_metrics;
 --     regardless of if people leave*/
 -- );
 
-CREATE TABLE member_health_metrics(
-    metric_id INTEGER PRIMARY KEY,
-    member_id INTEGER,
-    measurement_date DATE,
-    weight VARCHAR
-        CHECK (weight GLOB '[0-9][0-9].[0-9]' AND  
-        CAST(SUBSTR(weight, 1, 2) AS INTEGER) BETWEEN 0 AND 99 AND  
-        CAST(SUBSTR(weight, 4, 1) AS INTEGER) BETWEEN 0 AND 9),
-    body_fat_percentage VARCHAR
-        CHECK (body_fat_percentage GLOB '[0-9][0-9].[0-9]' AND  
-        CAST(SUBSTR(body_fat_percentage, 1, 2) AS INTEGER) BETWEEN 0 AND 99 AND  
-        CAST(SUBSTR(body_fat_percentage, 4, 1) AS INTEGER) BETWEEN 0 AND 9),
-    muscle_mass VARCHAR
-        CHECK (muscle_mass GLOB '[0-9][0-9].[0-9]' AND  
-        CAST(SUBSTR(muscle_mass, 1, 2) AS INTEGER) BETWEEN 0 AND 99 AND  
-        CAST(SUBSTR(muscle_mass, 4, 1) AS INTEGER) BETWEEN 0 AND 9),
-    bmi VARCHAR
-        CHECK (bmi GLOB '[0-9][0-9].[0-9]' AND  
-        CAST(SUBSTR(bmi, 1, 2) AS INTEGER) BETWEEN 0 AND 99 AND  
-        CAST(SUBSTR(bmi, 4, 1) AS INTEGER) BETWEEN 0 AND 9),
-    FOREIGN KEY (member_id) REFERENCES members(member_id)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
-);
+-- CREATE TABLE member_health_metrics(
+--     metric_id INTEGER PRIMARY KEY,
+--     member_id INTEGER,
+--     measurement_date DATE,
+--     weight VARCHAR
+--         CHECK (weight GLOB '[0-9][0-9].[0-9]' AND  
+--         CAST(SUBSTR(weight, 1, 2) AS INTEGER) BETWEEN 0 AND 99 AND  
+--         CAST(SUBSTR(weight, 4, 1) AS INTEGER) BETWEEN 0 AND 9),
+--     body_fat_percentage VARCHAR
+--         CHECK (body_fat_percentage GLOB '[0-9][0-9].[0-9]' AND  
+--         CAST(SUBSTR(body_fat_percentage, 1, 2) AS INTEGER) BETWEEN 0 AND 99 AND  
+--         CAST(SUBSTR(body_fat_percentage, 4, 1) AS INTEGER) BETWEEN 0 AND 9),
+--     muscle_mass VARCHAR
+--         CHECK (muscle_mass GLOB '[0-9][0-9].[0-9]' AND  
+--         CAST(SUBSTR(muscle_mass, 1, 2) AS INTEGER) BETWEEN 0 AND 99 AND  
+--         CAST(SUBSTR(muscle_mass, 4, 1) AS INTEGER) BETWEEN 0 AND 9),
+--     bmi VARCHAR
+--         CHECK (bmi GLOB '[0-9][0-9].[0-9]' AND  
+--         CAST(SUBSTR(bmi, 1, 2) AS INTEGER) BETWEEN 0 AND 99 AND  
+--         CAST(SUBSTR(bmi, 4, 1) AS INTEGER) BETWEEN 0 AND 9),
+--     FOREIGN KEY (member_id) REFERENCES members(member_id)
+--         ON UPDATE CASCADE
+--         ON DELETE CASCADE
+-- );
+
+-- CREATE TABLE equipment_maintenance_log(
+--     log_id INTEGER PRIMARY KEY,
+--     equipment_id INTEGER,
+--     maintenance_date DATE,
+--     description TEXT,
+--     staff_id INTEGER,
+--     FOREIGN KEY (equipment_id) REFERENCES equipment(equipment_id)
+--         ON UPDATE CASCADE
+--         ON DELETE CASCADE, -- if equipment no ,longer exists, no need for maintenance info
+--     FOREIGN KEY (staff_id) REFERENCES staff(staff_id)
+--         ON UPDATE CASCADE
+--         ON DELETE SET NULL -- Equipment may outlive staff within the org
+-- );
 
 -- TODO: Create the following tables:
 -- 1. locations
